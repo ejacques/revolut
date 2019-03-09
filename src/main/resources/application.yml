@@ -1,3 +1,24 @@
 micronaut:
     application:
         name: revolut
+
+
+datasources:
+    default:
+        url: ${JDBC_URL:`jdbc:h2:mem:default;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql';MODE=MySQL`}
+        username: ${JDBC_USER:sa}
+        password: ${JDBC_PASSWORD:""}
+        driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+
+
+
+jpa:
+    default:
+        packages-to-scan:
+        - 'br.com.erick.revolut.repository.entity'
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: create
+                show_sql: true
+

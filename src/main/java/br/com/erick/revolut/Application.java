@@ -1,4 +1,4 @@
-package br.com.erick;
+package br.com.erick.revolut;
 
 import io.micronaut.runtime.Micronaut;
 

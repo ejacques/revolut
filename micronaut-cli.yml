@@ -1,5 +1,5 @@
 profile: service
-defaultPackage: br.com.erick
+defaultPackage: br.com.erick.revolut
 ---
 testFramework: junit
 sourceLanguage: java
