@@ -6,8 +6,10 @@ import io.micronaut.spring.tx.annotation.Transactional;
 
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Singleton
 public class AccountsRepository {
@@ -24,6 +26,18 @@ public class AccountsRepository {
         return entityManager
                 .createQuery("select a from AccountEntity as a", AccountEntity.class)
                 .getResultList();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<AccountEntity> findByAccountNumber(final String accountNumber) {
+        try {
+            return Optional.of(entityManager
+                    .createQuery("select a from AccountEntity as a where a.number = :accountNumber", AccountEntity.class)
+                    .setParameter("accountNumber", accountNumber)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 
     @Transactional

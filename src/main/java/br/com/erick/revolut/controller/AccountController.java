@@ -6,34 +6,29 @@ import br.com.erick.revolut.service.AccountService;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.validation.Validated;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Validated
 @Controller("/accounts")
 public class AccountController {
 
-    private final AccountService accountService;
-
-    public AccountController(final AccountService accountService) {
-        this.accountService = accountService;
-    }
+    @Inject
+    private AccountService accountService;
 
     @Get
-    public HttpResponse<List<AccountDTO>> getAccounts() {
-        return HttpResponse.ok(accountService.findAll());
-    }
-
-    @Post
-    public HttpResponse<AccountDTO> createAccount(String name, String type) {
-        throw new UnsupportedOperationException();
+    public HttpResponse<List<AccountDTO>> getAccounts(@QueryValue(value = "showBalance", defaultValue = "false") boolean showBalance) {
+        return HttpResponse.ok(accountService.findAll(showBalance));
     }
 
     @Get("/{accountNumber}")
     public HttpResponse<AccountDTO> getAccount(String accountNumber) {
-        throw new UnsupportedOperationException();
+        return accountService.findByAccountNumber(accountNumber)
+                .map(HttpResponse::ok)
+                .orElse(HttpResponse.notFound());
     }
 
     @Get("/{accountNumber}/transfers")

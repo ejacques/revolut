@@ -10,8 +10,8 @@ public class AccountEntity {
 
     @Id
     private String number;
-
     private String name;
+    private String suid;
 
     public String getNumber() {
         return number;
@@ -28,4 +28,13 @@ public class AccountEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getSuid() {
+        return suid;
+    }
+
+    public void setSuid(String suid) {
+        this.suid = suid;
+    }
+
 }

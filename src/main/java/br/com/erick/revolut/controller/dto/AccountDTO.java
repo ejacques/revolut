@@ -2,20 +2,14 @@ package br.com.erick.revolut.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.math.BigDecimal;
+
 @JsonIgnoreProperties
 public class AccountDTO {
 
     private String number;
-    private String name;
-    private String type;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private PersonDTO owner;
+    private BigDecimal balance;
 
     public String getNumber() {
         return number;
@@ -25,11 +19,19 @@ public class AccountDTO {
         this.number = number;
     }
 
-    public String getType() {
-        return type;
+    public PersonDTO getOwner() {
+        return owner;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setOwner(PersonDTO owner) {
+        this.owner = owner;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }
