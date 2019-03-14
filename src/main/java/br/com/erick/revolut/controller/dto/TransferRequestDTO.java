@@ -7,8 +7,8 @@ public class TransferRequestDTO {
 
     @NotNull
     private BigDecimal amount;
-    private PersonDTO source;
-    private PersonDTO destiny;
+    private AccountDTO source;
+    private AccountDTO destination;
 
     public BigDecimal getAmount() {
         return amount;
@@ -18,19 +18,19 @@ public class TransferRequestDTO {
         this.amount = amount;
     }
 
-    public PersonDTO getSource() {
+    public AccountDTO getSource() {
         return source;
     }
 
-    public void setSource(PersonDTO source) {
+    public void setSource(AccountDTO source) {
         this.source = source;
     }
 
-    public PersonDTO getDestiny() {
-        return destiny;
+    public AccountDTO getDestination() {
+        return destination;
     }
 
-    public void setDestiny(PersonDTO destiny) {
-        this.destiny = destiny;
+    public void setDestination(AccountDTO destination) {
+        this.destination = destination;
     }
 }

@@ -1,6 +1,5 @@
 package br.com.erick.revolut.repository;
 
-import br.com.erick.revolut.repository.entity.DepositEntity;
 import br.com.erick.revolut.repository.entity.TransferEntity;
 import io.micronaut.configuration.hibernate.jpa.scope.CurrentSession;
 import io.micronaut.spring.tx.annotation.Transactional;
@@ -20,7 +19,7 @@ public class TransferRepository {
         this.entityManager = entityManager;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<TransferEntity> findByAccountNumber(final String accountNumber) {
         return entityManager
                 .createQuery("select t from TransferEntity as t " +
@@ -28,6 +27,11 @@ public class TransferRepository {
                         "or t.destinationAccountNumber = :accountNumber ", TransferEntity.class)
                 .setParameter("accountNumber", accountNumber)
                 .getResultList();
+    }
+
+    @Transactional
+    public void saveTransfer(TransferEntity entity) {
+        entityManager.persist(entity);
     }
 
 }

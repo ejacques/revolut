@@ -11,6 +11,13 @@ public class AccountDTO {
     private PersonDTO owner;
     private BigDecimal balance;
 
+    public AccountDTO() {
+    }
+
+    public AccountDTO(String number) {
+        this.number = number;
+    }
+
     public String getNumber() {
         return number;
     }

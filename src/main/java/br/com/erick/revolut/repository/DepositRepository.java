@@ -1,6 +1,5 @@
 package br.com.erick.revolut.repository;
 
-import br.com.erick.revolut.repository.entity.AccountEntity;
 import br.com.erick.revolut.repository.entity.DepositEntity;
 import io.micronaut.configuration.hibernate.jpa.scope.CurrentSession;
 import io.micronaut.spring.tx.annotation.Transactional;
@@ -20,7 +19,7 @@ public class DepositRepository {
         this.entityManager = entityManager;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<DepositEntity> findByAccountNumber(final String accountNumber) {
         return entityManager
                 .createQuery("select d from DepositEntity as d where d.accountNumber = :accountNumber ", DepositEntity.class)

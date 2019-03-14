@@ -12,23 +12,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton
-public class AccountsRepository {
+public class AccountRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public AccountsRepository(@CurrentSession EntityManager entityManager) {
+    public AccountRepository(@CurrentSession EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<AccountEntity> findAll() {
         return entityManager
                 .createQuery("select a from AccountEntity as a", AccountEntity.class)
                 .getResultList();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Optional<AccountEntity> findByAccountNumber(final String accountNumber) {
         try {
             return Optional.of(entityManager
