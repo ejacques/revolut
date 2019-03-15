@@ -3,6 +3,7 @@ package br.com.erick.revolut.controller.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @JsonIgnoreProperties
 public class AccountDTO {
@@ -40,5 +41,20 @@ public class AccountDTO {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountDTO dto = (AccountDTO) o;
+        return Objects.equals(number, dto.number) &&
+                Objects.equals(owner, dto.owner) &&
+                Objects.equals(balance, dto.balance);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, owner, balance);
     }
 }

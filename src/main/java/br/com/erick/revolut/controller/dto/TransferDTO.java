@@ -9,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @JsonIgnoreProperties
 public class TransferDTO {
@@ -59,5 +60,22 @@ public class TransferDTO {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TransferDTO that = (TransferDTO) o;
+        return Objects.equals(transactionId, that.transactionId) &&
+                Objects.equals(instant, that.instant) &&
+                Objects.equals(source, that.source) &&
+                Objects.equals(destination, that.destination) &&
+                Objects.equals(amount, that.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId, instant, source, destination, amount);
     }
 }

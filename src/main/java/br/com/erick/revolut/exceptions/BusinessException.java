@@ -7,7 +7,7 @@ public class BusinessException extends RuntimeException {
     }
 
     public BusinessException(final String message, final String... args) {
-        super(String.format(message, args));
+        super(String.format(message, (Object[]) args));
     }
 
 }

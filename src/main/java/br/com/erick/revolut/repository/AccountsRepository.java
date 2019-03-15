@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton
-public class AccountRepository {
+public class AccountsRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public AccountRepository(@CurrentSession EntityManager entityManager) {
+    public AccountsRepository(@CurrentSession EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

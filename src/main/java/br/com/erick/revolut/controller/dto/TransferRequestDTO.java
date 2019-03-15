@@ -1,13 +1,17 @@
 package br.com.erick.revolut.controller.dto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+@Valid
 public class TransferRequestDTO {
 
     @NotNull
     private BigDecimal amount;
+    @NotNull
     private AccountDTO source;
+    @NotNull
     private AccountDTO destination;
 
     public BigDecimal getAmount() {

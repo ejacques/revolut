@@ -6,6 +6,7 @@ import br.com.erick.revolut.exceptions.BusinessException;
 import br.com.erick.revolut.repository.TransferRepository;
 import br.com.erick.revolut.repository.entity.TransferEntity;
 import br.com.erick.revolut.service.converter.TransferConverter;
+import io.micronaut.context.annotation.Primary;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Primary
 @Singleton
 public class TransferService {
 

@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @Entity
@@ -68,5 +69,22 @@ public class TransferEntity {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TransferEntity entity = (TransferEntity) o;
+        return Objects.equals(transactionId, entity.transactionId) &&
+                Objects.equals(instant, entity.instant) &&
+                Objects.equals(sourceAccountNumber, entity.sourceAccountNumber) &&
+                Objects.equals(destinationAccountNumber, entity.destinationAccountNumber) &&
+                Objects.equals(amount, entity.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId, instant, sourceAccountNumber, destinationAccountNumber, amount);
     }
 }

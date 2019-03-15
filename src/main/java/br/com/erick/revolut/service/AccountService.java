@@ -1,8 +1,9 @@
 package br.com.erick.revolut.service;
 
 import br.com.erick.revolut.controller.dto.AccountDTO;
-import br.com.erick.revolut.repository.AccountRepository;
+import br.com.erick.revolut.repository.AccountsRepository;
 import br.com.erick.revolut.service.converter.AccountConverter;
+import io.micronaut.context.annotation.Primary;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,17 +12,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Primary
 @Singleton
 public class AccountService {
 
     @Inject
-    private AccountRepository accountRepository;
+    private AccountsRepository accountsRepository;
 
     @Inject
     private BalanceService balanceService;
 
     public List<AccountDTO> findAll(final boolean showBalance) {
-        return accountRepository.findAll().stream()
+        return accountsRepository.findAll().stream()
                 .map(AccountConverter::toDTO)
                 .map(accountDTO -> {
                     if (showBalance) {
@@ -33,7 +35,7 @@ public class AccountService {
     }
 
     public Optional<AccountDTO> findByAccountNumber(final String accountNumber) {
-        return accountRepository.findByAccountNumber(accountNumber)
+        return accountsRepository.findByAccountNumber(accountNumber)
                 .map(AccountConverter::toDTO)
                 .map(dto -> {
                     dto.setBalance(calculateBalance(accountNumber));
@@ -42,7 +44,7 @@ public class AccountService {
     }
 
     public void saveOrUpdate(AccountDTO dto) {
-        accountRepository.insert(AccountConverter.toEntity(dto));
+        accountsRepository.insert(AccountConverter.toEntity(dto));
     }
 
     public BigDecimal calculateBalance(final String accountNumber) {
